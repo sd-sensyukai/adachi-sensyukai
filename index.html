@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>極真流 空手道場 - 心身を鍛え、礼節を学ぶ</title>
+    <style>
+        /* --- デザイン（CSS） --- */
+        :root {
+			--main-blue: #00aaff; /* 明るい水色 */
+			--accent-blue: #0088cc; /* 少し濃い水色（文字の読みやすさ用） */
+			--light-blue: #e0f7ff; /* 背景用の非常に薄い水色 */
+			--text-color: #333;
+			--white: #ffffff;
+			--footer-bg: #f0f8ff; /* フッターも明るい色に変更 */        }
+
+        body {
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        /* ヘッダー */
+        header {
+            background-color: var(--main-blue);
+            color: var(--white);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 170, 255, 0.2);
+        }
+
+        nav {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+
+		/* ロゴ画像のサイズ調整 */
+		.logo img {
+			height: 100px; /* ヘッダーの高さに合わせて調整 */
+			width: auto;  /* 横幅は自動調整 */
+			display: block; /* 画像の下に隙間ができるのを防ぐ */
+		}
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+           border-right: 1px solid rgba(255, 255, 255, 0.4);
+        }
+		
+		.nav-links li:last-child {
+			border-right: none;
+		}
+		
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.95rem;
+			font-weight: bold; /* 文字を太く */
+			padding: 10px 15px;
+			display: block;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ccc;
+        }
+
+        /* ヒーローセクション */
+        /* ヒーローセクション（ここを上書き） */
+		.hero {
+			position: relative;
+			height: 400px;
+			max-width: 900px; /* 横幅を制限 */
+			margin: 20px auto; /* 中央寄せ */
+			overflow: hidden;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			color: var(--white);
+			text-align: center;
+			padding: 0 20px;
+			border-radius: 10px;
+			/* 【重要】元のbackground指定を削除しました */
+			background-color: #eee; 
+		}
+		
+		/* スライド全体の親 */
+		#hero-slider {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 1;
+		}
+		
+		/* 各スライドの共通設定 */
+		.slide {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-size: cover;
+			background-position: center;
+			opacity: 0; /* 最初は透明 */
+			transition: opacity 1.5s ease-in-out; /* 切り替わりをふわっとさせる */
+		}
+		
+		/* 白いフィルター（各スライドに重ねる） */
+		.slide::before {
+			content: "";
+			position: absolute;
+			top: 0;      /* 上端に固定 */
+			left: 0;     /* 左端に固定 */
+			width: 100%;
+			height: 100%;
+			background: rgba(255, 255, 255, 0.4);
+			z-index: 1;  /* 画像のすぐ上に配置 */
+		}
+
+		/* 表示中のスライド */
+		.slide.active {
+			opacity: 1;
+		}
+
+		/* 文字コンテンツをスライドより前面に */
+		.hero-content {
+			position: relative;
+			z-index: 10;
+			text-align: center;
+		}
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+		
+		.hero p {
+			color: #ffcc00; /* 鮮やかな黄色（ゴールド系） */
+			font-weight: bold;
+			font-size: 1.2rem;
+			/* 背景が明るくても文字をくっきりさせるための影 */
+			text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+		}
+		
+		.emphasize {
+			color: #e60012; /* 視認性の良い鮮やかな赤 */
+			font-weight: bold;
+			/* 必要に応じて少しだけ文字を大きくする場合 */
+			font-size: 1.1em; 
+			/* 灰色の影（右に2px、下に2px、ぼかし3px、色は灰色） */
+			text-shadow: 2px 2px 3px rgba(128, 128, 128, 0.6);
+		}
+
+        /* セクション共通 */
+        section {
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        h2 {
+            border-left: 5px solid var(--main-blue);
+            padding-left: 15px;
+            color: var(--main-blue);
+            margin-bottom: 30px;
+        }
+
+        /* 1. お知らせ */
+        .news-list {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .news-item {
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+            display: flex;
+        }
+        .news-date {
+            width: 120px;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        /* 2. 指導者紹介 */
+        .instructor-card {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            background: var(--light-blue);
+            padding: 30px;
+            border-radius: 10px;
+        }
+        .instructor-img {
+            width: 150px;
+            height: 150px;
+            background: #ccc;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* 3. 入門案内 */
+        .guide-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .guide-item {
+            background: var(--white);
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-top: 4px solid var(--main-blue);
+        }
+
+        /* 4. お問い合わせ */
+        .contact-form {
+            background: var(--main-blue);
+            color: var(--white);
+            padding: 40px;
+            border-radius: 10px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 4px;
+            border: none;
+        }
+        .submit-btn {
+            background: #ff9900;
+			color: white;
+            border: none;
+            padding: 12px 30px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+        .submit-btn:hover {
+            background: #e6b800;
+        }
+
+        /* 5. 稽古時間と場所 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background: var(--light-blue);
+        }
+        .map-placeholder {
+            width: 100%;
+            height: 300px;
+            background: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+        }
+		
+		.map-container {
+			position: relative;
+			padding-bottom: 56.25%; /* アスペクト比 16:9 */
+			height: 0;
+			overflow: hidden;
+			margin-bottom: 20px;
+		}
+
+		.map-container iframe {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100% !important;
+			height: 100% !important;
+			border-radius: 8px; /* 角を少し丸くするとおしゃれです */
+		}
+
+        footer {
+            background: var(--footer-bg);
+			color: var(--text-color);
+			border-top: 1px solid var(--main-blue);
+			text-align: center;
+			padding: 20px 0;
+			margin-top: 50px;
+        }
+
+        /* スマホ対応 */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .instructor-card { flex-direction: column; text-align: center; }
+            .guide-box { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <nav>
+        <div class="logo">
+			<img src="adachi_logo.jpg" alt="足立選手会ロゴ">
+		</div>
+        <ul class="nav-links">
+            <li><a href="#news">お知らせ</a></li>
+            <li><a href="#instructor">指導者</a></li>
+            <li><a href="#guide">入門案内</a></li>
+            <li><a href="#contact">お問い合わせ</a></li>
+            <li><a href="#access">稽古時間・場所</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="hero">
+    <div id="hero-slider">
+        <div class="slide active" style="background-image: url('top_image.jpg');"></div>
+        <div class="slide" style="background-image: url('ouzi_front.jpg');"></div>
+        <div class="slide" style="background-image: url('adachi_side.jpg');"></div>
+		<div class="slide" style="background-image: url('ouzi_side.jpg');"></div>
+		<div class="slide" style="background-image: url('adachi_in.jpg');"></div>
+		<div class="slide" style="background-image: url('adachi_out.jpg');"></div>
+    </div>
+    
+    <div class="hero-content">
+        <h1>誰もが<span class="emphasize">“自分の人生の選手”</span>になれる場所</h1>
+        <p>初心者・お子様から大人まで、正道を行く空手を。無料体験実施中！</p>
+    </div>
+</section>
+
+<section id="news">
+    <h2>お知らせ</h2>
+    <div class="news-list">
+        <div class="news-item">
+            <span class="news-date">2023.10.01</span>
+            <span class="news-text">秋の入会キャンペーン実施中！入会金半額。</span>
+        </div>
+        <div class="news-item">
+            <span class="news-date">2023.09.15</span>
+            <span class="news-text">昇級審査の結果を掲示しました。</span>
+        </div>
+        <div class="news-item">
+            <span class="news-date">2023.08.30</span>
+            <span class="news-text">【重要】夏季合宿のスケジュールについて。</span>
+        </div>
+    </div>
+</section>
+
+<section id="instructor">
+    <h2>指導者紹介</h2>
+    
+    <div class="instructor-card" style="margin-bottom: 30px;">
+        <div class="instructor-img-placeholder">
+            <img src="baba.png" alt="馬場喜一" class="instructor-img">
+        </div>
+        <div class="instructor-info">
+            <h3>道場責任者：馬場 喜一</h3>
+            <p><strong>極真会館 初段 / 銃剣道 二段</strong></p>
+            <ul style="list-style: none; padding: 0; font-size: 0.9rem;">
+                <li><strong>2018、2019年：</strong>白蓮会館 関東大会マスターズ 上級 重量級準優勝</li>
+                <li><strong>2021年：</strong>第一回プレ全日本極真護身空手道選手権大会 ベスト8</li>
+                <li><strong>その他：</strong>関東大会 準優勝4回</li>
+                <li><strong>2023年：</strong>20人組手完遂</li>
+            </ul>
+            <p style="margin-top: 10px;">
+                体重130キロ。道場生とともに自らも試合に出る事を目標に、日々稽古に励む。現在も、急速進化中！
+            </p>
+        </div>
+    </div>
+
+    <div class="instructor-card">
+        <div class="instructor-img-placeholder">
+            <img src="imai.png" alt="今井協生" class="instructor-img">
+        </div>
+        <div class="instructor-info">
+            <h3>指導員：今井 協生</h3>
+            <p><strong>初段</strong></p>
+            <ul style="list-style: none; padding: 0; font-size: 0.9rem;">
+                <li><strong>2019年：</strong>ナックルカップ 優勝</li>
+                <li><strong>2021年：</strong>白蓮会館 全関東空手道選手権大会 中量級 3位</li>
+                <li><strong>2023年：</strong>北信越空手道選手権大会 3位</li>
+            </ul>
+            <p style="margin-top: 10px;">
+                日々楽しく、分かりやすい稽古を目指して頑張っています！一緒に稽古頑張りましょう！
+            </p>
+        </div>
+    </div>
+</section>
+
+<section id="guide">
+    <h2>入門案内</h2>
+    <div class="guide-box">
+        <div class="guide-item">
+            <h3>対象</h3>
+            <p>小学生から大人まで、選手として競技に取り組みたい方も、運動不足解消や体づくりを目的とした方も歓迎します!</p>
+        </div>
+        <div class="guide-item">
+            <h3>費用</h3>
+            <p>入門費：無料<br>年会費：11,000円<br>月謝：8,000円<br>道着代：11,000円～</p>
+        </div>
+    </div>
+    <div style="text-align: center; margin-top: 30px;">
+        <p>まずは1週間の無料体験にお越しください！道着がない方も、動きやすい服装でお越しください！</p>
+    </div>
+</section>
+
+<section id="contact">
+    <h2>お問い合わせ</h2>
+    <div class="contact-form">
+        <form id="karateForm">
+            <div class="form-group">
+                <label>お名前（必須）</label>
+                <input type="text" placeholder="例：日本 太郎" required>
+            </div>
+            <div class="form-group">
+                <label>メールアドレス（必須）</label>
+                <input type="email" placeholder="example@mail.com" required>
+            </div>
+            <div class="form-group">
+                <label>お問い合わせ内容</label>
+                <textarea rows="5" placeholder="体験希望の旨や、ご質問をご記入ください"></textarea>
+            </div>
+            <button type="submit" class="submit-btn">送信する</button>
+        </form>
+    </div>
+</section>
+
+<section id="access">
+    <h2>稽古時間と場所</h2>
+    
+    <div style="overflow-x: auto;"> <table>
+            <thead>
+                <tr>
+                    <th>曜日</th>
+                    <th>稽古内容</th>
+                    <th>時間</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>月曜</td>
+                    <td>ミット空手</td>
+                    <td>20:00 - 21:30</td>
+                </tr>
+                <tr>
+                    <td>火曜</td>
+                    <td>通常稽古</td>
+                    <td>20:00 - 22:00</td>
+                </tr>
+                <tr>
+                    <td>水曜</td>
+                    <td colspan="2" style="background: #f0f0f0; color: #999;">（稽古なし）</td>
+                </tr>
+                <tr>
+                    <td>木曜</td>
+                    <td>通常稽古</td>
+                    <td>18:00 - 20:00</td>
+                </tr>
+                <tr>
+                    <td>金曜</td>
+                    <td>通常稽古</td>
+                    <td>20:00 - 22:00</td>
+                </tr>
+                <tr>
+                    <td>土曜</td>
+                    <td>ミット空手</td>
+                    <td>20:00 - 21:30</td>
+                </tr>
+                <tr>
+                    <td>日曜</td>
+                    <td style="color: #e60012; font-weight: bold;">王子道場稽古</td>
+                    <td>13:00 - 15:30</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div style="margin-top: 40px;">
+        <h3>アクセス</h3>
+        <p><strong>【メイン道場】</strong><br>
+           東京都足立区鹿浜7-26-9　小宮第1ハイツ101</p>
+        <p><strong>【王子道場】（日曜のみ）</strong><br>
+           東京都 北区 王子1-5-1 「夢ひろば」B1スタジオ</p>
+        
+        <div class="map-placeholder">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3236.5457089224187!2d139.75919087559666!3d35.78653417255351!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601893b9d1bccff5%3A0x896830e65884c47a!2z5qW155yf5Lya6aSo5rWc5LqV5rS-IOi2s-eri-mBuOaJi-S8mumBk-WgtA!5e0!3m2!1sja!2sjp!4v1766841845433!5m2!1sja!2sjp" width="100%" 
+        height="300" 
+        style="border:0;" 
+        allowfullscreen="" 
+        loading="lazy"></iframe>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2025 極真会館　浜井派 足立選手会 All Rights Reserved.</p>
+</footer>
+
+<script>
+	// ページが読み込まれてから実行させるための記述
+    window.addEventListener('DOMContentLoaded', () => {
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        // スライドが1枚以下の場合は動かさない
+        if (slides.length <= 1) return;
+
+        function nextSlide() {
+            // 現在のスライドを非表示に
+            slides[currentSlide].classList.remove('active');
+            
+            // 次の番号へ（枚数を超えたら0に戻る）
+            currentSlide = (currentSlide + 1) % slides.length;
+            
+            // 次のスライドを表示
+            slides[currentSlide].classList.add('active');
+        }
+
+        // 4秒ごとに切り替え
+        setInterval(nextSlide, 4000);
+    });
+
+    // --- ここにスムーズスクロールなどの他のJSがあってもOK ---
+    /* --- 動き（JS） --- */
+    // お問い合わせフォームの送信デモ
+    document.getElementById('karateForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('お問い合わせありがとうございます。このフォームはデモのため、実際には送信されません。');
+    });
+
+    // スムーズスクロール（ナビクリック時にゆっくり移動）
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
