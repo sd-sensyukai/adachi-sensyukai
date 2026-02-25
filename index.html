@@ -231,35 +231,46 @@
         }
 
         /* 4. お問い合わせ */
-        .contact-form {
-            background: var(--main-blue);
-            color: var(--white);
-            padding: 40px;
-            border-radius: 10px;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        input, textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border-radius: 4px;
-            border: none;
-        }
-        .submit-btn {
-            background: #ff9900;
-			color: white;
-            border: none;
-            padding: 12px 30px;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: 0.3s;
-        }
-        .submit-btn:hover {
-            background: #e6b800;
-        }
+        .contact-info-box {
+			background: var(--main-blue);
+			color: var(--white);
+			padding: 40px;
+			border-radius: 10px;
+			text-align: center;
+		}
+
+		.contact-lead {
+			font-size: 1.2rem;
+			margin-bottom: 30px;
+			font-weight: bold;
+		}
+
+		.contact-item {
+			margin-bottom: 20px;
+		}
+
+		.contact-label {
+			display: block;
+			font-size: 0.9rem;
+			opacity: 0.8;
+		}
+
+		.contact-link {
+			font-size: 1.4rem;
+			font-weight: bold;
+			color: #ffcc00;
+			text-decoration: none;
+		}
+
+		.contact-link:hover {
+			text-decoration: underline;
+		}
+
+		.contact-note {
+			font-size: 0.85rem;
+			margin-top: 20px;
+			opacity: 0.8;
+		}
 
         /* 5. 稽古時間と場所 */
         table {
@@ -355,16 +366,8 @@
     <h2>お知らせ</h2>
     <div class="news-list">
         <div class="news-item">
-            <span class="news-date">2023.10.01</span>
-            <span class="news-text">秋の入会キャンペーン実施中！入会金半額。</span>
-        </div>
-        <div class="news-item">
-            <span class="news-date">2023.09.15</span>
-            <span class="news-text">昇級審査の結果を掲示しました。</span>
-        </div>
-        <div class="news-item">
-            <span class="news-date">2023.08.30</span>
-            <span class="news-text">【重要】夏季合宿のスケジュールについて。</span>
+            <span class="news-date">2026.02.25</span>
+            <span class="news-text">ホームページをリニューアルしました</span>
         </div>
     </div>
 </section>
@@ -429,22 +432,29 @@
 
 <section id="contact">
     <h2>お問い合わせ</h2>
-    <div class="contact-form">
-        <form id="karateForm">
-            <div class="form-group">
-                <label>お名前（必須）</label>
-                <input type="text" placeholder="例：日本 太郎" required>
-            </div>
-            <div class="form-group">
-                <label>メールアドレス（必須）</label>
-                <input type="email" placeholder="example@mail.com" required>
-            </div>
-            <div class="form-group">
-                <label>お問い合わせ内容</label>
-                <textarea rows="5" placeholder="体験希望の旨や、ご質問をご記入ください"></textarea>
-            </div>
-            <button type="submit" class="submit-btn">送信する</button>
-        </form>
+    <div class="contact-info-box">
+        <p class="contact-lead">
+            体験希望・ご質問はお気軽にご連絡ください。
+        </p>
+
+        <div class="contact-item">
+            <span class="contact-label">📧 メール</span>
+            <a href="tomoaki8843@gmail.com" class="contact-link">
+                tomoaki8843@gmail.com
+            </a>
+        </div>
+
+        <div class="contact-item">
+            <span class="contact-label">📞 電話</span>
+            <a href="tel:07014849370" class="contact-link">
+                070-1484-9370
+            </a>
+        </div>
+
+        <p class="contact-note">
+            ※稽古中、もしくは本業時は電話に出られない場合がございます。<br>
+            その際はメールにてご連絡ください。
+        </p>
     </div>
 </section>
 
@@ -462,8 +472,8 @@
             <tbody>
                 <tr>
                     <td>月曜</td>
-                    <td>ミット空手</td>
-                    <td>20:00 - 21:30</td>
+                    <td>護身空手</td>
+                    <td>18:00 - 20:00</td>
                 </tr>
                 <tr>
                     <td>火曜</td>
@@ -476,7 +486,7 @@
                 </tr>
                 <tr>
                     <td>木曜</td>
-                    <td>通常稽古</td>
+                    <td>護身空手</td>
                     <td>18:00 - 20:00</td>
                 </tr>
                 <tr>
@@ -486,8 +496,8 @@
                 </tr>
                 <tr>
                     <td>土曜</td>
-                    <td>ミット空手</td>
-                    <td>20:00 - 21:30</td>
+                    <td>護身空手（不定期）</td>
+                    <td>09:00 - 12:00</td>
                 </tr>
                 <tr>
                     <td>日曜</td>
@@ -516,7 +526,7 @@
 </section>
 
 <footer>
-    <p>&copy; 2025 極真会館　浜井派 足立選手会 All Rights Reserved.</p>
+    <p>&copy; 2026 極真会館　浜井派 足立選手会 All Rights Reserved.</p>
 </footer>
 
 <script>
